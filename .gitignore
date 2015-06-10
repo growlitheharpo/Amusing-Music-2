@@ -3,6 +3,9 @@ bin/
 bin-debug/
 bin-release/
 
+# Don't include libraries just in case it's not kosher
+*swc
+
 # Other files and folders
 .settings/
 
