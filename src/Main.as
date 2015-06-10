@@ -12,11 +12,14 @@ package
 	{
 		[SWF(width = "800", height = "400")]
 		
+		public static const FPS:int = 60;
+		
 		public function Main() 
 		{
-			super(800, 400, 60, false);
+			super(800, 400, FPS, false);
 			
 			FP.world = new TestWorld();
+			FP.console.enable();
 		}
 		
 	}
