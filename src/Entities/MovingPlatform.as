@@ -84,7 +84,7 @@ package entities
 			
 			goingDown = true;
 			
-			var moveTween:VarTween = new VarTween();
+			var moveTween:VarTween = new VarTween(goingDownSetter);
 			moveTween.tween(this, "y", bottomYPos, moveDownTime);
 			this.addTween(moveTween, true);
 		}

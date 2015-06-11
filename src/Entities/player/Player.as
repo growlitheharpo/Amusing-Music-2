@@ -16,7 +16,7 @@ package entities.player
 	public class Player extends Entity 
 	{
 		private const SOLID_TYPES:Array = ["solid", "solidMP"];
-		public static const SIZE:int = 50;
+		public static const SIZE:int = 25;
 		
 		private var ySpeed:Number = 0;
 		private var xSpeed:Number;
@@ -41,7 +41,7 @@ package entities.player
 		
 		private function movePlayer():void 
 		{
-			xSpeed = 300 * FP.elapsed;
+			xSpeed = 3 * (Main.FPS * FP.elapsed);
 			
 			if (Input.check(Key.RIGHT) || Input.check(Key.D))
 				moveBy(xSpeed, 0, SOLID_TYPES);
@@ -63,19 +63,35 @@ package entities.player
 			{	
 				var hitObject:MovingPlatform = collide("solidMP", x, y + 1) as MovingPlatform;
 				if (hitObject != null && !hitObject.goingDown)
-					this.y = hitObject.y - this.height;//moveBy(0, (this.y + this.height - hitObject.y), "solid");
-				
+				{
+					if (!collide("solid", x, (hitObject.y - this.height))) //moving up won't hit anything
+						this.y = hitObject.y - this.height;
+					else
+					{
+						if ((this.x + this.halfWidth) < (hitObject.x + hitObject.halfWidth)) //further to the left
+							this.x = hitObject.x - this.width - 1;
+						else if ((this.x + this.halfWidth) > (hitObject.x + hitObject.halfWidth)) //further to the left
+							this.x = hitObject.x + hitObject.width + 1;
+						else
+						{
+							if (FP.random > 0.5)
+								this.x = hitObject.x - this.width - 1;
+							else
+								this.x = hitObject.x + hitObject.width + 1;
+						}
+					}
+				}
 				
 				ySpeed = 0;
 				if (Input.pressed(Key.SPACE) || Input.pressed(Key.UP) || Input.pressed(Key.W))
-					ySpeed = -20;
+					ySpeed = -10;
 			}
 			else
 			{
 				ySpeed += C.GRAVITY;
 			}
 			
-			var realSpeed:Number = (ySpeed * 100) * FP.elapsed;
+			var realSpeed:Number = ySpeed * (Main.FPS * FP.elapsed);
 			
 			moveBy(0, ySpeed, SOLID_TYPES);
 		}

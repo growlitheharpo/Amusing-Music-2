@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OgmoVersion>2.1.0.6</OgmoVersion>
-  <Name>New Project</Name>
-  <BackgroundColor A="255" R="169" G="174" B="211" />
-  <GridColor A="255" R="189" G="186" B="155" />
+  <Name>Amusing Music</Name>
+  <BackgroundColor A="255" R="64" G="0" B="64" />
+  <GridColor A="255" R="192" G="192" B="192" />
   <LevelDefaultSize>
-    <Width>1024</Width>
-    <Height>576</Height>
+    <Width>640</Width>
+    <Height>360</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>1024</Width>
-    <Height>576</Height>
+    <Width>640</Width>
+    <Height>360</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
-    <Width>32000</Width>
-    <Height>576</Height>
+    <Width>8000</Width>
+    <Height>360</Height>
   </LevelMaximumSize>
   <Filename>H:\Side Projects\Amusing Music 2\levels\AmusingMusic2.oep</Filename>
   <AngleMode>Radians</AngleMode>
-  <CameraEnabled>false</CameraEnabled>
+  <CameraEnabled>true</CameraEnabled>
   <CameraSize>
     <Width>640</Width>
-    <Height>480</Height>
+    <Height>360</Height>
   </CameraSize>
   <ExportCameraPosition>false</ExportCameraPosition>
   <LevelValueDefinitions />
@@ -29,8 +29,8 @@
     <LayerDefinition xsi:type="GridLayerDefinition">
       <Name>solid</Name>
       <Grid>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>40</Width>
+        <Height>40</Height>
       </Grid>
       <ScrollFactor>
         <X>1</X>
@@ -42,8 +42,8 @@
     <LayerDefinition xsi:type="TileLayerDefinition">
       <Name>visualTiles</Name>
       <Grid>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>40</Width>
+        <Height>40</Height>
       </Grid>
       <ScrollFactor>
         <X>1</X>
@@ -54,8 +54,8 @@
     <LayerDefinition xsi:type="EntityLayerDefinition">
       <Name>entities</Name>
       <Grid>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>40</Width>
+        <Height>40</Height>
       </Grid>
       <ScrollFactor>
         <X>1</X>
@@ -68,8 +68,8 @@
       <Name>baseTiles</Name>
       <FilePath>..\assets\image\WORLD_TILES_V1.png</FilePath>
       <TileSize>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>40</Width>
+        <Height>40</Height>
       </TileSize>
       <TileSep>0</TileSep>
     </Tileset>
@@ -77,8 +77,8 @@
   <EntityDefinitions>
     <EntityDefinition Name="movingPlatform" Limit="100" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
       <Size>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>40</Width>
+        <Height>40</Height>
       </Size>
       <Origin>
         <X>0</X>
@@ -91,6 +91,21 @@
         <ValueDefinition xsi:type="IntValueDefinition" Name="ID" Default="0" Min="0" Max="100" ShowSlider="false" />
         <ValueDefinition xsi:type="IntValueDefinition" Name="yScale" Default="1" Min="1" Max="9" ShowSlider="false" />
       </ValueDefinitions>
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="playerStart" Limit="1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>25</Width>
+        <Height>25</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="..\assets\image\PLAYER.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
   </EntityDefinitions>

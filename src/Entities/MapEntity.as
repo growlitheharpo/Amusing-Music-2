@@ -24,6 +24,7 @@ package entities
 			super(x, y, graphic, mask);
 			
 			xmlData = FP.getXML(C.LEVEL_ONE_DATA);
+			playerStart = new Point(xmlData.entities.playerStart.@x, xmlData.entities.playerStart.@y);
 		}
 		
 		override public function added():void
