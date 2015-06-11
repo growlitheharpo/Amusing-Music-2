@@ -2,7 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
-	import Worlds.TestWorld;
+	import worlds.TestWorld;
 	
 	/**
 	 * ...

@@ -1,7 +1,7 @@
-package Worlds 
+package worlds 
 {
-	import Entities.MovingPlatform;
-	import Entities.SoundThingTest;
+	import entities.MovingPlatform;
+	import entities.SoundThingTest;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
@@ -13,15 +13,22 @@ package Worlds
 	public class TestWorld extends World 
 	{
 		private var platform:MovingPlatform;
+		private var platform2:MovingPlatform;
 		
-		public function TestWorld() 
+		private var soundTest:SoundThingTest;
+		
+		public function TestWorld()
 		{
 			super();
 			
 			platform= new MovingPlatform(4, 400, 300);
 			add(platform);
 			
-			add(new SoundThingTest());
+			platform2 = new MovingPlatform(4, 400 - 128, 300);
+			add(platform2);
+			
+			soundTest = new SoundThingTest(updatePlatform);
+			add(soundTest);
 		}
 		
 		override public function update():void
@@ -30,6 +37,14 @@ package Worlds
 			
 			if (Input.pressed(Key.SPACE))
 				platform.moveUp();
+		}
+		
+		private function updatePlatform(platformIDtoUpdate:int):void
+		{
+			if (platformIDtoUpdate == 0)
+				platform.moveUp();
+			else
+				platform2.moveUp();
 		}
 		
 	}

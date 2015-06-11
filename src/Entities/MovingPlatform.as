@@ -1,4 +1,4 @@
-package Entities 
+package entities 
 {
 	//import com.greensock.TweenLite;
 	import flash.events.TimerEvent;
@@ -46,7 +46,8 @@ package Entities
 		
 		override public function added():void
 		{
-			moveUpTime = (myScale / 10);
+			//moveUpTime = (myScale / 10);
+			moveUpTime = 0.2;
 			topYPos = ((myImage.height * myScale) * -1) + C.BASE_TILE_SIZE + this.y;
 			bottomYPos = 0 + this.y;
 			

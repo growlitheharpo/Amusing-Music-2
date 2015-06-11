@@ -1,4 +1,4 @@
-package Entities.Music 
+package entities.music 
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -117,7 +117,7 @@ package Entities.Music
 			thisSize /= channelLength / 4;
 			thisSize = Math.abs(Math.round(thisSize * 100)) / 10;
 			
-			if (thisSize >= levelToWatchFor * 0.8)
+			if (thisSize >= levelToWatchFor)
 			{
 				this.removeEventListener(Event.ENTER_FRAME, listenForSound);
 				
