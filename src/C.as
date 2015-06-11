@@ -27,7 +27,18 @@ package
 		[Embed(source = "../assets/image/MOVING_PLATFORM_BASE.png")]
 		public static const MOVING_PLATFORM_BASE_IMG:Class;
 		
+		[Embed(source = "../assets/image/PLAYER.png")]
+		public static const PLAYER_IMG:Class;
+		
+		[Embed(source = "../assets/image/WORLD_TILES_V1.png")]
+		public static const BASE_WORLD_TILES:Class;
+		
+		[Embed(source = "../levels/TestLevel1.oel", mimeType = "application/octet-stream")]
+		public static const LEVEL_ONE_DATA:Class;
+		
 		public static const BASE_TILE_SIZE:int = 64;
+		
+		public static const GRAVITY:Number = 1.5;
 	}
 
 }

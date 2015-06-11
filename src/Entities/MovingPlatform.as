@@ -24,14 +24,16 @@ package entities
 		private var bottomYPos:Number;
 		
 		private var myScale:int;
+		public var myID:int;
 		
 		public var timerRunning:Boolean;
 		public var goingDown:Boolean;
 		
 		public var myImage:Image;
 		
-		public function MovingPlatform(myScale:int = 1, x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		public function MovingPlatform(myID:int = 0, myScale:int = 1, x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
+			this.myID = myID;
 			this.myScale = myScale;
 			
 			myImage = new Image(C.MOVING_PLATFORM_BASE_IMG);
@@ -39,15 +41,14 @@ package entities
 			
 			graphic = myImage;
 			setHitbox(myImage.width, (myImage.height * myScale));
-			type = "solid";
+			type = "solidMP";
 			
 			super(x, y, graphic, mask);
 		}
 		
 		override public function added():void
 		{
-			//moveUpTime = (myScale / 10);
-			moveUpTime = 0.2;
+			moveUpTime = (1 / myScale);
 			topYPos = ((myImage.height * myScale) * -1) + C.BASE_TILE_SIZE + this.y;
 			bottomYPos = 0 + this.y;
 			

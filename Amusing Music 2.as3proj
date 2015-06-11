@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="bin\AmusingMusic2.swf" />
     <movie fps="30" />
-    <movie width="800" />
-    <movie height="400" />
+    <movie width="1024" />
+    <movie height="576" />
     <movie version="14" />
     <movie minorVersion="0" />
     <movie platform="Flash Player" />

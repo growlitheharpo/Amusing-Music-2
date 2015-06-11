@@ -2,7 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
-	import worlds.TestWorld;
+	import worlds.GameWorld;
 	
 	/**
 	 * ...
@@ -10,15 +10,15 @@ package
 	 */
 	public class Main extends Engine 
 	{
-		[SWF(width = "800", height = "400")]
+		[SWF(width = "1024", height = "576")]
 		
 		public static const FPS:int = 60;
 		
 		public function Main() 
 		{
-			super(800, 400, FPS, false);
+			super(1024, 576, FPS, false);
 			
-			FP.world = new TestWorld();
+			FP.world = new GameWorld();
 			FP.console.enable();
 		}
 		
