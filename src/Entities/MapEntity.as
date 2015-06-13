@@ -19,11 +19,16 @@ package entities
 		
 		public var playerStart:Point;
 		
-		public function MapEntity(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		public function MapEntity(currentLevel:int, x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			super(x, y, graphic, mask);
 			
-			xmlData = FP.getXML(C.LEVEL_ONE_DATA);
+			switch(currentLevel)
+			{
+				case 1: xmlData = FP.getXML(C.LEVEL_ONE_DATA); break;
+				default: xmlData = null; break;
+			}
+			
 			playerStart = new Point(xmlData.entities.playerStart.@x, xmlData.entities.playerStart.@y);
 		}
 		

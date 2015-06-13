@@ -84,7 +84,7 @@ package entities
 			
 			goingDown = true;
 			
-			var moveTween:VarTween = new VarTween(goingDownSetter);
+			var moveTween:VarTween = new VarTween();// goingDownSetter);
 			moveTween.tween(this, "y", bottomYPos, moveDownTime);
 			this.addTween(moveTween, true);
 		}
@@ -94,6 +94,16 @@ package entities
 			goingDown = false;
 		}
 		
+		/* Returns -1 if the item should come before, 0 if the same, 1 if after */
+		static public function sortFunction(platformA:MovingPlatform, platformB:MovingPlatform):Number
+		{
+			if (platformA.myID < platformB.myID)
+				return -1;
+			else if (platformA.myID == platformB.myID)
+				return 0;
+			else
+				return 1;
+		}
 	}
 
 }

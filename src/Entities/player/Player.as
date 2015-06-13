@@ -62,6 +62,7 @@ package entities.player
 			if (hitGround)
 			{	
 				var hitObject:MovingPlatform = collide("solidMP", x, y + 1) as MovingPlatform;
+				
 				if (hitObject != null && !hitObject.goingDown)
 				{
 					if (!collide("solid", x, (hitObject.y - this.height))) //moving up won't hit anything

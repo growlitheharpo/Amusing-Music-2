@@ -18,16 +18,20 @@ package worlds
 		private var player:Player;
 		private var platformList:Vector.<MovingPlatform>
 		
-		public function GameWorld() 
+		private var currentLevel:int;
+		
+		public function GameWorld(currentLevel:int = 1 ) 
 		{
 			super();
 			
-			map = new MapEntity();
+			map = new MapEntity(currentLevel);
 			add(map);
 			
 			platformList = map.getPlatforms();
 			for each(var platform:MovingPlatform in platformList)
 				add(platform);
+				
+			platformList.sort(MovingPlatform.sortFunction);
 			
 			player = new Player(map.playerStart.x, map.playerStart.y);
 			add(player);
@@ -42,7 +46,11 @@ package worlds
 				trace(platformList[0]);
 				platformList[0].moveUp();
 			}
-				
+			if (Input.pressed(Key.K))
+			{
+				remove(platformList[0]);
+			}
+			
 			updateCamera();
 		}
 		
@@ -56,6 +64,30 @@ package worlds
 			camera.x = xCoord;
 		}
 		
+		private function movePlatform(platformID:int):void
+		{
+			var high:int = platformList.size() - 1;
+			var low:int = 0;
+			var mid:int;
+			
+			do {
+				if (low > high)
+				{
+					mid = -1;
+					break;
+				}
+				
+				mid = (low + high) / 2;
+				
+				if (platformID > platformList[mid].myID)
+					low = mid + 1;
+				else if (platformID < platformList[mid].myID)
+					high = mid - 1;
+			} while (platformList[mid].myID != platformID);
+			
+			if (mid != -1)
+				platformList[mid].moveUp();
+		}
 	}
 
 }
