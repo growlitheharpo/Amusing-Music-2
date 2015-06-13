@@ -25,13 +25,20 @@ package entities.sound
 			this.queuedSound = initialSound;
 		}
 		
-		public function init():void
+		public function init(initialPlatformList:Vector.<Vector.<int>> = null):void
 		{
 			keepPlaying = true;
-			platformIDsForThisSound = new Vector.<Vector.<int>>();
 			
-			var row1:Vector.<int> = new <int>[0];
-			platformIDsForThisSound.push(row1);
+			if (initialPlatformList)
+			{
+				platformIDsForThisSound = initialPlatformList;
+			}
+			else
+			{
+				platformIDsForThisSound = new Vector.<Vector.<int>>();
+				var row1:Vector.<int> = new <int>[0];
+				platformIDsForThisSound.push(row1);
+			}
 			
 			playSound();
 		}

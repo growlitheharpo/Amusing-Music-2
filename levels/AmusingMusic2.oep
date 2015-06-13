@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OgmoVersion>2.1.0.6</OgmoVersion>
   <Name>Amusing Music</Name>
-  <BackgroundColor A="255" R="64" G="0" B="64" />
+  <BackgroundColor A="255" R="0" G="163" B="240" />
   <GridColor A="255" R="192" G="192" B="192" />
   <LevelDefaultSize>
     <Width>640</Width>

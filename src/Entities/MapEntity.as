@@ -15,7 +15,7 @@ package entities
 	public class MapEntity extends Entity 
 	{
 		private var xmlData:XML
-		private var tilemap_1:Tilemap;
+		public var tilemap_1:Tilemap;
 		
 		public var playerStart:Point;
 		

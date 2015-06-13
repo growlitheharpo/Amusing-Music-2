@@ -3,6 +3,7 @@ package worlds
 	import entities.MapEntity;
 	import entities.MovingPlatform;
 	import entities.player.Player;
+	import entities.sound.SoundManager;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -17,6 +18,7 @@ package worlds
 		private var map:MapEntity;
 		private var player:Player;
 		private var platformList:Vector.<MovingPlatform>
+		private var soundManager:SoundManager;
 		
 		private var currentLevel:int;
 		
@@ -24,34 +26,45 @@ package worlds
 		{
 			super();
 			
+			FP.screen.color = 0x8ABDDB;
+			
 			map = new MapEntity(currentLevel);
-			add(map);
 			
 			platformList = map.getPlatforms();
 			for each(var platform:MovingPlatform in platformList)
 				add(platform);
 				
+			add(map);
+				
 			platformList.sort(MovingPlatform.sortFunction);
 			
 			player = new Player(map.playerStart.x, map.playerStart.y);
 			add(player);
+			
+			soundManager = new SoundManager(0);
+			soundManager.setPlatformFunction = movePlatform;
+			soundManager.init(new <Vector.<int>>[ new <int>[1, 2, 3]]);
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			
-			if (Input.pressed(Key.P))
-			{
-				trace(platformList[0]);
-				platformList[0].moveUp();
-			}
-			if (Input.pressed(Key.K))
-			{
-				remove(platformList[0]);
-			}
-			
 			updateCamera();
+			checkPlayerHitLava();
+		}
+		
+		private function checkPlayerHitLava():void 
+		{
+			var playerRow:int = (player.y / C.BASE_TILE_SIZE) + 1;
+			var playerCol1:int = (player.x / C.BASE_TILE_SIZE);
+			var playerCol2:int = ((player.x + player.width) / C.BASE_TILE_SIZE);
+			
+			var tile1:int = map.tilemap_1.getTile(playerCol1, playerRow);
+			var tile2:int = map.tilemap_1.getTile(playerCol2, playerRow);
+			
+			if (tile1 == 2 || tile2 == 2)
+				trace("DEAD!");
 		}
 		
 		private function updateCamera():void 
@@ -66,7 +79,7 @@ package worlds
 		
 		private function movePlatform(platformID:int):void
 		{
-			var high:int = platformList.size() - 1;
+			var high:int = platformList.length - 1;
 			var low:int = 0;
 			var mid:int;
 			
