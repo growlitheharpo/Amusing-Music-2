@@ -26,15 +26,20 @@ package entities
 		private var myScale:int;
 		public var myID:int;
 		
+		public var starIDToAttachTo:int;
+		public var soundPieceToAttachTo:int;
+		
 		public var timerRunning:Boolean;
 		public var goingDown:Boolean;
 		
 		public var myImage:Image;
 		
-		public function MovingPlatform(myID:int = 0, myScale:int = 1, x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		public function MovingPlatform(myID:int, myScale:int, starID:int, soundPiece:int, x:Number=0, y:Number=0)//, graphic:Graphic=null, mask:Mask=null) 
 		{
 			this.myID = myID;
 			this.myScale = myScale;
+			this.starIDToAttachTo = starID;
+			this.soundPieceToAttachTo = soundPiece;
 			
 			myImage = new Image(C.MOVING_PLATFORM_BASE_IMG);
 			myImage.scaleY = myScale;

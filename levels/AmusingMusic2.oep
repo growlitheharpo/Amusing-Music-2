@@ -90,6 +90,8 @@
       <ValueDefinitions>
         <ValueDefinition xsi:type="IntValueDefinition" Name="ID" Default="0" Min="0" Max="100" ShowSlider="false" />
         <ValueDefinition xsi:type="IntValueDefinition" Name="yScale" Default="1" Min="1" Max="9" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="starIDActivator" Default="-1" Min="-1" Max="256" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="soundPiece" Default="0" Min="0" Max="3" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
@@ -106,6 +108,24 @@
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="star" Limit="100" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>40</Width>
+        <Height>40</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Rectangle" ImagePath="..\assets\image\ROTATING_STAR_SHEET.png" Tiled="true">
+        <RectColor A="255" R="255" G="255" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="IntValueDefinition" Name="soundToPlay" Default="0" Min="0" Max="10" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="starID" Default="0" Min="0" Max="100" ShowSlider="false" />
+      </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
   </EntityDefinitions>

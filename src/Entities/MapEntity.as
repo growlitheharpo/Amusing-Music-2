@@ -1,5 +1,6 @@
 package entities 
 {
+	import entities.collectables.Star;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -50,15 +51,31 @@ package entities
 			var platforms:Vector.<MovingPlatform> = new Vector.<MovingPlatform>();
 			
 			var list:XMLList;
-			var element:XML;
+			var tPlatform:XML;
 			
 			list = xmlData.entities.movingPlatform;
-			for each (element in list)
+			for each (tPlatform in list)
 			{
-				platforms.push(new MovingPlatform(element.@ID, element.@yScale, element.@x, element.@y));
+				platforms.push(new MovingPlatform(tPlatform.@ID, tPlatform.@yScale, tPlatform.@starIDActivator, tPlatform.@soundPiece, tPlatform.@x, tPlatform.@y));
 			}
 			
 			return platforms;
+		}
+		
+		public function getStars():Vector.<Star>
+		{
+			var stars:Vector.<Star> = new Vector.<Star>();
+			
+			var list:XMLList;
+			var tStar:XML;
+			
+			list = xmlData.entities.star;
+			for each (tStar in list)
+			{
+				stars.push(new Star(tStar.@starID, tStar.@soundToPlay, tStar.@x, tStar.@y));
+			}
+			
+			return stars;
 		}
 		
 	}

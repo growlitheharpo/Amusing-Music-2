@@ -33,7 +33,10 @@ package
 		[Embed(source = "../assets/image/WORLD_TILES_V1.png")]
 		public static const BASE_WORLD_TILES:Class;
 		
-		[Embed(source="../levels/TestLevel2.oel", mimeType="application/octet-stream")]//[Embed(source = "../levels/TestLevel1.oel", mimeType = "application/octet-stream")]
+		[Embed(source = "../assets/image/ROTATING_STAR_SHEET.png")]
+		public static const ROTATING_STAR_SHEET:Class;
+		
+		[Embed(source="../levels/TestLevel2.oel", mimeType="application/octet-stream")]
 		public static const LEVEL_ONE_DATA:Class;
 		
 		public static const BASE_TILE_SIZE:int = 40;

@@ -20,13 +20,13 @@ package entities.sound
 		
 		public var setPlatformFunction:Function;
 		
-		public function SoundManager(initialSound:int = 0)
+		public function SoundManager()
 		{
-			this.queuedSound = initialSound;
 		}
 		
-		public function init(initialPlatformList:Vector.<Vector.<int>> = null):void
+		public function init(initialSound:int, initialPlatformList:Vector.<Vector.<int>> = null):void
 		{
+			queuedSound = initialSound;
 			keepPlaying = true;
 			
 			if (initialPlatformList)
@@ -73,6 +73,7 @@ package entities.sound
 		
 		public function setQueuedSound(newSound:int, platformIDs:Vector.<Vector.<int>>):void
 		{
+			trace("set queueueueued sound to: " + newSound);
 			queuedSound = newSound;
 			platformIDsForThisSound = platformIDs.concat();
 		}

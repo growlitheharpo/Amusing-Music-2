@@ -1,5 +1,6 @@
 package worlds 
 {
+	import entities.collectables.Star;
 	import entities.MapEntity;
 	import entities.MovingPlatform;
 	import entities.player.Player;
@@ -17,13 +18,15 @@ package worlds
 	{
 		private var map:MapEntity;
 		private var player:Player;
-		private var platformList:Vector.<MovingPlatform>
+		private var platformList:Vector.<MovingPlatform>;
+		private var starList:Vector.<Star>;
 		private var soundManager:SoundManager;
 		
 		private var currentLevel:int;
 		
 		public function GameWorld(currentLevel:int = 1 ) 
 		{
+			this.currentLevel = currentLevel;
 			super();
 			
 			FP.screen.color = 0x8ABDDB;
@@ -34,6 +37,10 @@ package worlds
 			for each(var platform:MovingPlatform in platformList)
 				add(platform);
 				
+			starList = map.getStars();
+			for each (var star:Star in starList)
+				add(star);
+				
 			add(map);
 				
 			platformList.sort(MovingPlatform.sortFunction);
@@ -41,17 +48,66 @@ package worlds
 			player = new Player(map.playerStart.x, map.playerStart.y);
 			add(player);
 			
-			soundManager = new SoundManager(0);
+			soundManager = new SoundManager();
 			soundManager.setPlatformFunction = movePlatform;
-			soundManager.init(new <Vector.<int>>[ new <int>[1, 2, 3]]);
+		}
+		
+		override public function begin():void
+		{
+			super.begin();
+			
+			var myList:Vector.<Vector.<int>> = buildStarsForPlatform( -1);
+			soundManager.init(0, myList);
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			
+			checkCollectStar();
+			
 			updateCamera();
 			checkPlayerHitLava();
+		}
+		
+		private function checkCollectStar():void 
+		{
+			var starHit:Star = player.collide("star", player.x, player.y) as Star;
+			
+			if (!starHit)
+				return;
+				
+			var MPlist:Vector.<Vector.<int>> = buildStarsForPlatform(starHit.myID);
+			soundManager.setQueuedSound(starHit.mySound, MPlist);
+			
+			remove(starHit);
+		}
+		
+		private function buildStarsForPlatform(starID:int):Vector.<Vector.<int>> 
+		{
+			var listOfMPs:Vector.<Vector.<int>> = new Vector.<Vector.<int>>();
+			var soundPiece1List:Vector.<int> = new Vector.<int>();
+			var soundPiece2List:Vector.<int> = new Vector.<int>();
+			var soundPiece3List:Vector.<int> = new Vector.<int>();
+			var soundPiece4List:Vector.<int> = new Vector.<int>();
+			
+			for each (var platform:MovingPlatform in platformList)
+			{
+				if (platform.starIDToAttachTo <= starID)
+				{
+					switch (platform.soundPieceToAttachTo)
+					{
+						case 0: soundPiece1List.push(platform.myID); break;
+						case 1: soundPiece2List.push(platform.myID); break;
+						case 2: soundPiece3List.push(platform.myID); break;
+						case 3: soundPiece4List.push(platform.myID); break;
+					}
+				}
+			}
+			
+			listOfMPs.push(soundPiece1List, soundPiece2List, soundPiece3List, soundPiece4List);
+			
+			return listOfMPs;
 		}
 		
 		private function checkPlayerHitLava():void 
@@ -64,7 +120,12 @@ package worlds
 			var tile2:int = map.tilemap_1.getTile(playerCol2, playerRow);
 			
 			if (tile1 == 2 || tile2 == 2)
-				trace("DEAD!");
+			{
+				this.removeAll();
+				soundManager.stop();
+				
+				FP.world = new YouDiedMenu(this.currentLevel);
+			}
 		}
 		
 		private function updateCamera():void 

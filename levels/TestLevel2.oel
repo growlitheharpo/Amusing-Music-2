@@ -19,8 +19,10 @@
 2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2</visualTiles>
   <entities>
     <playerStart id="0" x="120" y="280" />
-    <movingPlatform id="1" x="480" y="320" ID="1" yScale="5" />
-    <movingPlatform id="3" x="1200" y="200" ID="3" yScale="4" />
-    <movingPlatform id="2" x="1680" y="200" ID="2" yScale="4" />
+    <movingPlatform id="1" x="480" y="320" ID="1" yScale="5" starIDActivator="-1" soundPiece="0" />
+    <movingPlatform id="3" x="1200" y="200" ID="3" yScale="4" starIDActivator="1" soundPiece="1" />
+    <movingPlatform id="2" x="1680" y="200" ID="2" yScale="4" starIDActivator="2" soundPiece="0" />
+    <star id="4" x="560" y="120" soundToPlay="1" starID="1" />
+    <star id="5" x="1360" y="80" soundToPlay="1" starID="2" />
   </entities>
 </level>
