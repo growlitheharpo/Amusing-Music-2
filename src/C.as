@@ -36,12 +36,23 @@ package
 		[Embed(source = "../assets/image/ROTATING_STAR_SHEET.png")]
 		public static const ROTATING_STAR_SHEET:Class;
 		
+		[Embed(source = "../assets/image/BASIC_MENU_BUTTON.png")]
+		public static const BASIC_MENU_BUTTON:Class;
+		
 		[Embed(source="../levels/TestLevel2.oel", mimeType="application/octet-stream")]
 		public static const LEVEL_ONE_DATA:Class;
+		
+		[Embed(source = "../assets/image/HOW_TO_TEXT_IMG.png")]
+		public static const HOW_TO_IMG:Class;
+		
+		[Embed(source = "../assets/fonts/BROADW.TTF", embedAsCFF = "false", fontFamily = 'Broadway')]
+		public static const BROADWAY_FONT:Class;
 		
 		public static const BASE_TILE_SIZE:int = 40;
 		
 		public static const GRAVITY:Number = 0.75;
+		
+		public static const NUM_OF_LEVELS:int = 1;
 	}
 
 }

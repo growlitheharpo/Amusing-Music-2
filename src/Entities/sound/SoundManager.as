@@ -73,7 +73,6 @@ package entities.sound
 		
 		public function setQueuedSound(newSound:int, platformIDs:Vector.<Vector.<int>>):void
 		{
-			trace("set queueueueued sound to: " + newSound);
 			queuedSound = newSound;
 			platformIDsForThisSound = platformIDs.concat();
 		}

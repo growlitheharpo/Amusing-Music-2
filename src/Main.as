@@ -2,7 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
-	import worlds.GameWorld;
+	import worlds.MainMenu;
 	
 	/**
 	 * ...
@@ -18,8 +18,8 @@ package
 		{
 			super(640, 360, FPS, false);
 			
-			FP.world = new GameWorld();
-			FP.console.enable();
+			FP.world = new MainMenu();
+		//	FP.console.enable();
 		}
 		
 	}

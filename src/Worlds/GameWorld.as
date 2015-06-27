@@ -22,6 +22,8 @@ package worlds
 		private var starList:Vector.<Star>;
 		private var soundManager:SoundManager;
 		
+		private var numStarsCollected:int;
+		
 		private var currentLevel:int;
 		
 		public function GameWorld(currentLevel:int = 1 ) 
@@ -50,6 +52,8 @@ package worlds
 			
 			soundManager = new SoundManager();
 			soundManager.setPlatformFunction = movePlatform;
+			
+			numStarsCollected = 0;
 		}
 		
 		override public function begin():void
@@ -65,9 +69,21 @@ package worlds
 			super.update();
 			
 			checkCollectStar();
+			checkPlayerHitLava();
 			
 			updateCamera();
-			checkPlayerHitLava();
+			checkWonLevel();
+		}
+		
+		private function checkWonLevel():void 
+		{
+			if (numStarsCollected == starList.length)
+			{
+				if (currentLevel == C.NUM_OF_LEVELS)
+					FP.world = new GameOverMenu(1, GameOverMenu.GAME_WON);
+				else
+					FP.world = new GameOverMenu(currentLevel++, GameOverMenu.LEVEL_WON);
+			}
 		}
 		
 		private function checkCollectStar():void 
@@ -81,6 +97,7 @@ package worlds
 			soundManager.setQueuedSound(starHit.mySound, MPlist);
 			
 			remove(starHit);
+			numStarsCollected++;
 		}
 		
 		private function buildStarsForPlatform(starID:int):Vector.<Vector.<int>> 
@@ -124,7 +141,7 @@ package worlds
 				this.removeAll();
 				soundManager.stop();
 				
-				FP.world = new YouDiedMenu(this.currentLevel);
+				FP.world = new GameOverMenu(this.currentLevel, GameOverMenu.GAME_LOST);
 			}
 		}
 		
@@ -157,6 +174,7 @@ package worlds
 					low = mid + 1;
 				else if (platformID < platformList[mid].myID)
 					high = mid - 1;
+					
 			} while (platformList[mid].myID != platformID);
 			
 			if (mid != -1)
