@@ -2,14 +2,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OgmoVersion>2.1.0.6</OgmoVersion>
   <Name>Amusing Music</Name>
-  <BackgroundColor A="255" R="0" G="163" B="240" />
+  <BackgroundColor A="255" R="221" G="253" B="255" />
   <GridColor A="255" R="192" G="192" B="192" />
   <LevelDefaultSize>
-    <Width>640</Width>
+    <Width>720</Width>
     <Height>360</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>640</Width>
+    <Width>720</Width>
     <Height>360</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
@@ -66,7 +66,7 @@
   <Tilesets>
     <Tileset>
       <Name>baseTiles</Name>
-      <FilePath>..\assets\image\WORLD_TILES_V1.png</FilePath>
+      <FilePath>..\assets\image\editorTiles.png</FilePath>
       <TileSize>
         <Width>40</Width>
         <Height>40</Height>
@@ -120,7 +120,7 @@
         <Y>0</Y>
       </Origin>
       <ImageDefinition DrawMode="Rectangle" ImagePath="..\assets\image\ROTATING_STAR_SHEET.png" Tiled="true">
-        <RectColor A="255" R="255" G="255" B="0" />
+        <RectColor A="255" R="252" G="233" B="3" />
       </ImageDefinition>
       <ValueDefinitions>
         <ValueDefinition xsi:type="IntValueDefinition" Name="soundToPlay" Default="0" Min="0" Max="10" ShowSlider="false" />

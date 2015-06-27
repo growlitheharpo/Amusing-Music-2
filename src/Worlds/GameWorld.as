@@ -5,6 +5,7 @@ package worlds
 	import entities.MovingPlatform;
 	import entities.player.Player;
 	import entities.sound.SoundManager;
+	import entities.ui.ScoreCounter;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -21,6 +22,7 @@ package worlds
 		private var platformList:Vector.<MovingPlatform>;
 		private var starList:Vector.<Star>;
 		private var soundManager:SoundManager;
+		private var starCounter:ScoreCounter;
 		
 		private var numStarsCollected:int;
 		
@@ -38,11 +40,12 @@ package worlds
 			platformList = map.getPlatforms();
 			for each(var platform:MovingPlatform in platformList)
 				add(platform);
+			
 				
 			starList = map.getStars();
 			for each (var star:Star in starList)
 				add(star);
-				
+			
 			add(map);
 				
 			platformList.sort(MovingPlatform.sortFunction);
@@ -54,6 +57,9 @@ package worlds
 			soundManager.setPlatformFunction = movePlatform;
 			
 			numStarsCollected = 0;
+			
+			starCounter = new ScoreCounter(numStarsCollected, starList.length, 410, 10);
+			add(starCounter);
 		}
 		
 		override public function begin():void
@@ -79,10 +85,13 @@ package worlds
 		{
 			if (numStarsCollected == starList.length)
 			{
+				removeAll();
+				soundManager.stop();
+				
 				if (currentLevel == C.NUM_OF_LEVELS)
 					FP.world = new GameOverMenu(1, GameOverMenu.GAME_WON);
 				else
-					FP.world = new GameOverMenu(currentLevel++, GameOverMenu.LEVEL_WON);
+					FP.world = new GameOverMenu(++currentLevel, GameOverMenu.LEVEL_WON);
 			}
 		}
 		
@@ -98,6 +107,7 @@ package worlds
 			
 			remove(starHit);
 			numStarsCollected++;
+			starCounter.updateCount(numStarsCollected);
 		}
 		
 		private function buildStarsForPlatform(starID:int):Vector.<Vector.<int>> 

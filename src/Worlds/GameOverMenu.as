@@ -34,15 +34,15 @@ package worlds
 			switch (type)
 			{
 				case GAME_LOST:
-						largeBanner = new LargeBanner("You Died!");
+						largeBanner = new LargeBanner("You Died!", 0, 50);
 						returnToGame = new BasicButton("Try Again", 30);
 						break;
 				case LEVEL_WON: 
-						largeBanner = new LargeBanner("Level " + int(destinationLevelTo - 1).toString + " Complete!");
-						returnToGame = new BasicButton("Next Level", 30);
+						largeBanner = new LargeBanner("Level " + int(destinationLevel - 1).toString() + "\nComplete!", 0, 10);
+						returnToGame = new BasicButton("Continue", 30);
 						break;
-				case GAME_WON;
-						largeBanner = new LargeBanner("You Win!");
+				case GAME_WON:
+						largeBanner = new LargeBanner("You Win!", 0, 50);
 						returnToGame = new BasicButton("Play Again", 30);
 						break;
 			}
@@ -59,7 +59,6 @@ package worlds
 			add(returnToMainMenu);
 			
 			largeBanner.x = FP.halfWidth - largeBanner.halfWidth;
-			largeBanner.y = 50;
 			
 			returnToGame.x = FP.halfWidth - returnToGame.halfWidth;
 			returnToGame.y = 220;

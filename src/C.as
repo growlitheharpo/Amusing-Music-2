@@ -6,6 +6,9 @@ package
 	 */
 	public class C 
 	{
+		/***********************
+		 * SOUND DATA
+		 * *********************/
 		[Embed(source = "../lib/SoundAssets.swf", symbol = "SONG_1_WAV")]
 		public static const SONG_1:Class;
 		
@@ -24,6 +27,11 @@ package
 		[Embed(source = "../lib/SoundAssets.swf", symbol = "SONG_6_WAV")]
 		public static const SONG_6:Class;
 		
+		
+		
+		/***********************
+		 * IMAGE/SPRITE DATA
+		 * *********************/
 		[Embed(source = "../assets/image/MOVING_PLATFORM_BASE.png")]
 		public static const MOVING_PLATFORM_BASE_IMG:Class;
 		
@@ -39,20 +47,44 @@ package
 		[Embed(source = "../assets/image/BASIC_MENU_BUTTON.png")]
 		public static const BASIC_MENU_BUTTON:Class;
 		
-		[Embed(source="../levels/TestLevel2.oel", mimeType="application/octet-stream")]
-		public static const LEVEL_ONE_DATA:Class;
-		
 		[Embed(source = "../assets/image/HOW_TO_TEXT_IMG.png")]
 		public static const HOW_TO_IMG:Class;
 		
-		[Embed(source = "../assets/fonts/BROADW.TTF", embedAsCFF = "false", fontFamily = 'Broadway')]
+		[Embed(source = "../assets/image/SCORE_COUNTER.png")]
+		public static const BASE_SCORE_COUNTER_IMG:Class;
+		
+		
+		
+		/***********************
+		 * FONT DATA
+		 * *********************/
+		[Embed(source = "../assets/fonts/BROADW.TTF", embedAsCFF = "false", fontFamily = 'Broadway')] //main menu font
 		public static const BROADWAY_FONT:Class;
 		
+		[Embed(source = "../assets/fonts/comic.ttf", embedAsCFF = "false", fontFamily = 'ScoreCounterFont')] //it's comic sans #dealwithit
+		public static const SCORE_COUNTER_FONT:Class;
+		
+		
+		
+		/***********************
+		 * MISC. DATA
+		 * *********************/
 		public static const BASE_TILE_SIZE:int = 40;
 		
 		public static const GRAVITY:Number = 0.75;
 		
-		public static const NUM_OF_LEVELS:int = 1;
+		
+		
+		/***********************
+		 * LEVEL DATA
+		 * *********************/
+		public static const NUM_OF_LEVELS:int = 2;
+		
+		[Embed(source="../levels/Level1.oel", mimeType="application/octet-stream")]
+		public static const LEVEL_ONE_DATA:Class;
+		
+		[Embed(source = "../levels/Level2.oel", mimeType = "application/octet-stream")]
+		public static const LEVEL_TWO_DATA:Class;
 	}
 
 }

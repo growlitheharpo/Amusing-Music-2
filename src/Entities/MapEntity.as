@@ -27,6 +27,7 @@ package entities
 			switch(currentLevel)
 			{
 				case 1: xmlData = FP.getXML(C.LEVEL_ONE_DATA); break;
+				case 2: xmlData = FP.getXML(C.LEVEL_TWO_DATA); break;
 				default: xmlData = null; break;
 			}
 			
