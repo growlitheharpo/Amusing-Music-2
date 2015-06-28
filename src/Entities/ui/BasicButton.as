@@ -22,6 +22,8 @@ package entities.ui
 			nText.y = (myImage.height / 2) - (nText.height / 2);
 			
 			graphic = new Graphiclist(myImage, nText);
+			graphic.scrollX = 0;
+			graphic.scrollY = 0; //ui element; fix position on the screen
 			
 			setHitbox(myImage.width, myImage.height);
 			

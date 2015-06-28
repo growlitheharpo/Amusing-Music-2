@@ -3,13 +3,17 @@ package entities.sound
 	import entities.sound.music.MySfx;
 	import entities.sound.music.Song1Sfx;
 	import entities.sound.music.Song2Sfx;
+	import entities.sound.music.Song3Sfx;
+	import entities.sound.music.Song4Sfx;
+	import entities.sound.music.Song5Sfx;
+	import entities.sound.music.Song6Sfx;
 	/**
 	 * ...
 	 * @author James Keats
 	 */
 	public class SoundManager 
 	{
-		private const SOUND_LIST:Vector.<Class> = new <Class>[Song1Sfx, Song2Sfx];
+		private const SOUND_LIST:Vector.<Class> = new <Class>[Song1Sfx, Song2Sfx, Song3Sfx, Song4Sfx, Song5Sfx, Song6Sfx];
 		
 		private var currentSong:MySfx;
 		private var platformIDsForThisSound:Vector.<Vector.<int>>;
@@ -56,7 +60,7 @@ package entities.sound
 				}
 				
 				currentSong.turnOnMusicTags();
-				currentSong.play();
+				currentSong.play(Main.VOLUME);
 			}
 		}
 		
@@ -83,6 +87,19 @@ package entities.sound
 			keepPlaying = false;
 			currentSong.stop();
 			currentSong.turnOffMusicTags();
+		}
+		
+		public function pause():void
+		{
+			keepPlaying = false;
+			currentSong.stop();
+			currentSong.turnOffMusicTags();
+		}
+		
+		public function restart():void
+		{
+			keepPlaying = true;
+			playSound();
 		}
 	}
 

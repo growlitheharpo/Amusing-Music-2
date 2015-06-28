@@ -5,8 +5,12 @@ package worlds
 	import entities.MovingPlatform;
 	import entities.player.Player;
 	import entities.sound.SoundManager;
+	import entities.ui.BasicButton;
+	import entities.ui.OptionsMenu;
 	import entities.ui.ScoreCounter;
+	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
@@ -25,15 +29,20 @@ package worlds
 		private var starCounter:ScoreCounter;
 		
 		private var numStarsCollected:int;
+		private var paused:Boolean;
 		
 		private var currentLevel:int;
+		
+		private var optionsMenu:OptionsMenu;
+		private var resumeButton:BasicButton;
+		private var mainmenuButton:BasicButton;
 		
 		public function GameWorld(currentLevel:int = 1 ) 
 		{
 			this.currentLevel = currentLevel;
 			super();
 			
-			FP.screen.color = 0x8ABDDB;
+			FP.screen.color = C.SKY_COLOR;
 			
 			map = new MapEntity(currentLevel);
 			
@@ -56,10 +65,15 @@ package worlds
 			soundManager = new SoundManager();
 			soundManager.setPlatformFunction = movePlatform;
 			
+			paused = false;
 			numStarsCollected = 0;
 			
 			starCounter = new ScoreCounter(numStarsCollected, starList.length, 410, 10);
 			add(starCounter);
+			
+			optionsMenu = new OptionsMenu("volume");
+			resumeButton = new BasicButton("Resume", 30, C.HOW_TO_RIGHTBUTTON_X, C.HOW_TO_RIGHTBUTTON_Y);
+			mainmenuButton = new BasicButton("Quit", 30, C.HOW_TO_LEFTBUTTON_X, C.HOW_TO_LEFTBUTTON_Y);
 		}
 		
 		override public function begin():void
@@ -72,13 +86,71 @@ package worlds
 		
 		override public function update():void
 		{
-			super.update();
+			if (!paused)
+			{
+				super.update();
+				
+				checkCollectStar();
+				checkPlayerHitLava();
+				
+				updateCamera();
+				checkWonLevel();
+				checkHitPause();
+			}
+			else
+			{
+				optionsMenu.update();
+				
+				if (Input.mousePressed)
+				{
+					if (checkButtonPressed(resumeButton))
+					{
+						removePauseMenu();
+						paused = false;
+					}
+					else if (checkButtonPressed(mainmenuButton))
+					{
+						this.removeAll();
+						
+						FP.world = new MainMenu();
+					}
+				}
+			}
+		}
+		
+		private function checkButtonPressed(button:BasicButton):Boolean 
+		{
+			if (Input.mouseX > button.x && Input.mouseY > button.y && Input.mouseX < button.right && Input.mouseY < button.bottom)
+				return true;
+			else
+				return false;
+		}
+		
+		private function checkHitPause():void 
+		{
+			if (Input.pressed(Key.ESCAPE) || Input.pressed(Key.P))
+			{
+				drawPauseMenu();
+				paused = true;
+			}
+		}
+		
+		private function drawPauseMenu():void 
+		{
+			add(optionsMenu);
+			add(resumeButton);
+			add(mainmenuButton);
 			
-			checkCollectStar();
-			checkPlayerHitLava();
+			soundManager.pause();
+		}
+		
+		private function removePauseMenu():void
+		{
+			remove(optionsMenu);
+			remove(resumeButton);
+			remove(mainmenuButton);
 			
-			updateCamera();
-			checkWonLevel();
+			soundManager.restart();
 		}
 		
 		private function checkWonLevel():void 
@@ -88,7 +160,7 @@ package worlds
 				removeAll();
 				soundManager.stop();
 				
-				if (currentLevel == C.NUM_OF_LEVELS)
+				if (currentLevel == C.LIST_OF_LEVELS.length)
 					FP.world = new GameOverMenu(1, GameOverMenu.GAME_WON);
 				else
 					FP.world = new GameOverMenu(++currentLevel, GameOverMenu.LEVEL_WON);

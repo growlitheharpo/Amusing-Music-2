@@ -24,12 +24,10 @@ package entities
 		{
 			super(x, y, graphic, mask);
 			
-			switch(currentLevel)
-			{
-				case 1: xmlData = FP.getXML(C.LEVEL_ONE_DATA); break;
-				case 2: xmlData = FP.getXML(C.LEVEL_TWO_DATA); break;
-				default: xmlData = null; break;
-			}
+			if (currentLevel > C.LIST_OF_LEVELS.length || currentLevel <= 0)
+				xmlData = null;
+			else
+				xmlData = FP.getXML(C.LIST_OF_LEVELS[currentLevel - 1]);
 			
 			playerStart = new Point(xmlData.entities.playerStart.@x, xmlData.entities.playerStart.@y);
 		}

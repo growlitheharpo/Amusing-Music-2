@@ -14,6 +14,8 @@ package
 		
 		public static const FPS:int = 60;
 		
+		public static var VOLUME:Number = 1;
+		
 		public function Main() 
 		{
 			super(640, 360, FPS, false);

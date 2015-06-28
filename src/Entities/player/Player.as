@@ -36,20 +36,19 @@ package entities.player
 		{
 			super.update();
 			
+			runGravity();
 			movePlayer();
 		}
 		
 		private function movePlayer():void 
 		{
-			xSpeed = 3 * (Main.FPS * FP.elapsed);
+			xSpeed = C.PLAYER_LEFTRIGHT_SPEED * (Main.FPS * FP.elapsed);
 			
 			if (Input.check(Key.RIGHT) || Input.check(Key.D))
 				moveBy(xSpeed, 0, SOLID_TYPES);
 				
 			if (Input.check(Key.LEFT) || Input.check(Key.A))
 				moveBy( -xSpeed, 0, SOLID_TYPES);
-				
-			runGravity();
 		}
 		
 		private function runGravity():void 
@@ -85,7 +84,7 @@ package entities.player
 				
 				ySpeed = 0;
 				if (Input.pressed(Key.SPACE) || Input.pressed(Key.UP) || Input.pressed(Key.W))
-					ySpeed = -10;
+					ySpeed = -C.PLAYER_JUMP_INC;
 			}
 			else
 			{

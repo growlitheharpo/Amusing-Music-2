@@ -7,6 +7,9 @@ bin-release/
 *.swc
 *.fla
 
+#Leave out the WIP menu images
+assets/image/menu/
+
 # Other files and folders
 .settings/
 

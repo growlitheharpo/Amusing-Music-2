@@ -19,6 +19,8 @@ package entities.ui
 			nText.x = -(nText.width / 2);
 			
 			graphic = nText;
+			graphic.scrollX = 0;
+			graphic.scrollY = 0; //ui element; fix position on the screen
 			
 			super(x, y, graphic, mask);
 		}

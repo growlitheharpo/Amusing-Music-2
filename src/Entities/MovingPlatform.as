@@ -4,6 +4,7 @@ package entities
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
@@ -53,7 +54,7 @@ package entities
 		
 		override public function added():void
 		{
-			moveUpTime = (1 / myScale);
+			moveUpTime = FP.clamp((1 / myScale), 0.05, 0.35);
 			topYPos = ((myImage.height * myScale) * -1) + C.BASE_TILE_SIZE + this.y;
 			bottomYPos = 0 + this.y;
 			

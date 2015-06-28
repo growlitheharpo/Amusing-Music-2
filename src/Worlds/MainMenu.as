@@ -3,6 +3,7 @@ package worlds
 	import entities.MapEntity;
 	import entities.ui.BasicButton;
 	import entities.ui.LargeBanner;
+	import entities.ui.OptionsMenu;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -20,7 +21,7 @@ package worlds
 		private var startButton:BasicButton;
 		private var howtoButton:BasicButton;
 		private var gobackButton:BasicButton;
-		private var howtoText:Entity;
+		private var howtoText:OptionsMenu;
 		
 		public function MainMenu() 
 		{
@@ -39,10 +40,10 @@ package worlds
 			howtoButton.y = startButton.y + startButton.height + 20;
 			
 			gobackButton = new BasicButton("Go Back", 30);
-			gobackButton.x = FP.halfWidth - gobackButton.width - 40;
-			gobackButton.y = FP.height - gobackButton.height - 20;
+			gobackButton.x = C.HOW_TO_LEFTBUTTON_X;
+			gobackButton.y = C.HOW_TO_LEFTBUTTON_Y;
 			
-			howtoText = new Entity(10, 10, new Image(C.HOW_TO_IMG));
+			howtoText = new OptionsMenu("howto");
 			
 			initMenu();
 		}
@@ -62,7 +63,8 @@ package worlds
 		{
 			removeAll();
 			
-			startButton.x = FP.halfWidth + 40; startButton.y = FP.height - startButton.height - 20; //start button gets moved around
+			startButton.x = C.HOW_TO_RIGHTBUTTON_X;
+			startButton.y = C.HOW_TO_RIGHTBUTTON_Y; //start button gets moved around
 			
 			add(howtoText);
 			add(gobackButton);

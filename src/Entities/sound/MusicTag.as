@@ -27,7 +27,7 @@ package entities.sound
 			super();
 			
 			this.timeToNext = timeToNext;
-			this.levelToWatchFor = levelToWatchFor;
+			this.levelToWatchFor = levelToWatchFor * Main.VOLUME;
 			
 			if (this.myPlatforms) this.myPlatforms.length = 0;
 			this.myPlatforms = clone(myColumns);

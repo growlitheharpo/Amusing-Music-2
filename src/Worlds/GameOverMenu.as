@@ -3,6 +3,7 @@ package worlds
 	import entities.ui.BasicButton;
 	import entities.ui.LargeBanner;
 	import net.flashpunk.FP;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
@@ -44,6 +45,7 @@ package worlds
 				case GAME_WON:
 						largeBanner = new LargeBanner("You Win!", 0, 50);
 						returnToGame = new BasicButton("Play Again", 30);
+						var winSound:Sfx = new Sfx(C.WIN_SOUND, null, null); winSound.play(Main.VOLUME);
 						break;
 			}
 			
