@@ -1,0 +1,2 @@
+Comic Sans is a font created by Microsoft.
+Simply copy "comic.ttf" from "C:/Windows/Fonts" to this folder!

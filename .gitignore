@@ -9,6 +9,8 @@ bin-release/
 
 #Leave out the WIP menu images
 assets/image/menu/
+assets/fonts/*.ttf
+assets/fonts/*.TTF
 
 # Other files and folders
 .settings/
