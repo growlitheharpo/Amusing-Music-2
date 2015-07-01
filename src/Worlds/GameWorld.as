@@ -1,3 +1,12 @@
+/* *****************************************************************************
+ * Amusing Music 2 is a portfolio piece demonstrating rhythm-based platforming.
+ *   Copyright (C) 2015  James Keats (www.jameskeats.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ ****************************************************************************** */
 package worlds 
 {
 	import entities.collectables.Star;
@@ -39,38 +48,42 @@ package worlds
 		
 		public function GameWorld(currentLevel:int = 1 ) 
 		{
+			//Set level and do any World() stuff necessary
 			this.currentLevel = currentLevel;
 			super();
 			
 			FP.screen.color = C.SKY_COLOR;
 			
+			//MapEntity loads XML data created by Ogmo
 			map = new MapEntity(currentLevel);
 			
+			//Load stars and platforms from the map
 			platformList = map.getPlatforms();
+			platformList.sort(MovingPlatform.sortFunction);
 			for each(var platform:MovingPlatform in platformList)
 				add(platform);
 			
-				
 			starList = map.getStars();
 			for each (var star:Star in starList)
 				add(star);
 			
 			add(map);
-				
-			platformList.sort(MovingPlatform.sortFunction);
 			
 			player = new Player(map.playerStart.x, map.playerStart.y);
 			add(player);
 			
+			//Create the sound manager and give it the necessary function pointer
 			soundManager = new SoundManager();
 			soundManager.setPlatformFunction = movePlatform;
 			
 			paused = false;
 			numStarsCollected = 0;
 			
+			//create and add the score counter (it uses comic sans dohoho)
 			starCounter = new ScoreCounter(numStarsCollected, starList.length, 410, 10);
 			add(starCounter);
 			
+			//for the sake of simplicity, but not memory, we create our pause menu objects and just add/remove when necessary
 			optionsMenu = new OptionsMenu("volume");
 			resumeButton = new BasicButton("Resume", 30, C.HOW_TO_RIGHTBUTTON_X, C.HOW_TO_RIGHTBUTTON_Y);
 			mainmenuButton = new BasicButton("Quit", 30, C.HOW_TO_LEFTBUTTON_X, C.HOW_TO_LEFTBUTTON_Y);
@@ -118,6 +131,10 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Returns true if the mouse is over the given button.
+		 * @param button The button to check.
+		 */
 		private function checkButtonPressed(button:BasicButton):Boolean 
 		{
 			if (Input.mouseX > button.x && Input.mouseY > button.y && Input.mouseX < button.right && Input.mouseY < button.bottom)
@@ -126,6 +143,9 @@ package worlds
 				return false;
 		}
 		
+		/**
+		 * See if escape or P were pressed this frame
+		 */
 		private function checkHitPause():void 
 		{
 			if (Input.pressed(Key.ESCAPE) || Input.pressed(Key.P))
@@ -135,6 +155,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Add the pause menu and stop the music.
+		 */
 		private function drawPauseMenu():void 
 		{
 			add(optionsMenu);
@@ -144,6 +167,9 @@ package worlds
 			soundManager.pause();
 		}
 		
+		/**
+		 * Remove the pause menu and start the music.
+		 */
 		private function removePauseMenu():void
 		{
 			remove(optionsMenu);
@@ -153,6 +179,9 @@ package worlds
 			soundManager.restart();
 		}
 		
+		/**
+		 * Checks if the player has all the stars. If yes, automatically goes to next menu.
+		 */
 		private function checkWonLevel():void 
 		{
 			if (numStarsCollected == starList.length)
@@ -167,6 +196,9 @@ package worlds
 			}
 		}
 		
+		/**
+		 * See if the player just collected a star. If yes, ++ the numCollected and update the score counter.
+		 */
 		private function checkCollectStar():void 
 		{
 			var starHit:Star = player.collide("star", player.x, player.y) as Star;
@@ -182,6 +214,12 @@ package worlds
 			starCounter.updateCount(numStarsCollected);
 		}
 		
+		/**
+		 * Build the list of platforms set to start/continue with a given star.
+		 * @param starID The ID of the star to check. If a platform has that ID or less, 
+		 * it will start with that star.
+		 * @return A vector of vectors of integers - { soundpiece1:{platforms}, soundpiece2:{platforms}} etc
+		 */
 		private function buildStarsForPlatform(starID:int):Vector.<Vector.<int>> 
 		{
 			var listOfMPs:Vector.<Vector.<int>> = new Vector.<Vector.<int>>();
@@ -209,6 +247,9 @@ package worlds
 			return listOfMPs;
 		}
 		
+		/**
+		 * See if the tile below the player is a lava tile
+		 */
 		private function checkPlayerHitLava():void 
 		{
 			var playerRow:int = (player.y / C.BASE_TILE_SIZE) + 1;
@@ -218,7 +259,7 @@ package worlds
 			var tile1:int = map.tilemap_1.getTile(playerCol1, playerRow);
 			var tile2:int = map.tilemap_1.getTile(playerCol2, playerRow);
 			
-			if (tile1 == 2 || tile2 == 2)
+			if (tile1 == 2 || tile2 == 2) //FIXME: Lava is hardcoded to tile 2. Any way to check at compile or runtime?
 			{
 				this.removeAll();
 				soundManager.stop();
@@ -227,6 +268,10 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Track the player with the camera.
+		 * Currently only tracks on X axis, but theoretically taller levels could be built...
+		 */
 		private function updateCamera():void 
 		{
 			var min:int = C.BASE_TILE_SIZE; //keep ONE tile off screen at all times
@@ -237,6 +282,10 @@ package worlds
 			camera.x = xCoord;
 		}
 		
+		/**
+		 * Tell a platform to start going up.
+		 * @param platformID The ID of the platform to move.
+		 */
 		private function movePlatform(platformID:int):void
 		{
 			var high:int = platformList.length - 1;

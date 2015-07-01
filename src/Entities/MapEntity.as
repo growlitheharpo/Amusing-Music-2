@@ -1,3 +1,12 @@
+/* *****************************************************************************
+ * Amusing Music 2 is a portfolio piece demonstrating rhythm-based platforming.
+ *   Copyright (C) 2015  James Keats (www.jameskeats.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ ****************************************************************************** */
 package entities 
 {
 	import entities.collectables.Star;
@@ -10,7 +19,7 @@ package entities
 	import net.flashpunk.masks.Grid;
 	
 	/**
-	 * ...
+	 * Loads the data for a level from the appropriate XML.
 	 * @author James Keats
 	 */
 	public class MapEntity extends Entity 
@@ -20,9 +29,13 @@ package entities
 		
 		public var playerStart:Point;
 		
-		public function MapEntity(currentLevel:int, x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		/**
+		 * Create a new map.
+		 * @param	currentLevel The level (starts at 1) to load.
+		 */
+		public function MapEntity(currentLevel:int) 
 		{
-			super(x, y, graphic, mask);
+			super(0, 0, null, null);
 			
 			if (currentLevel > C.LIST_OF_LEVELS.length || currentLevel <= 0)
 				xmlData = null;
@@ -32,6 +45,9 @@ package entities
 			playerStart = new Point(xmlData.entities.playerStart.@x, xmlData.entities.playerStart.@y);
 		}
 		
+		/**
+		 * Loads the collision grid and the tilemap when added to world.
+		 */
 		override public function added():void
 		{
 			var mapGrid:Grid = new Grid(xmlData.@width, xmlData.@height, C.BASE_TILE_SIZE, C.BASE_TILE_SIZE, 0, 0);
@@ -45,6 +61,10 @@ package entities
 			graphic = tilemap_1;
 		}
 		
+		/**
+		 * Fills a vector with new MovingPlatforms with properties loaded from XML.
+		 * @return The vector
+		 */
 		public function getPlatforms():Vector.<MovingPlatform>
 		{
 			var platforms:Vector.<MovingPlatform> = new Vector.<MovingPlatform>();
@@ -61,6 +81,10 @@ package entities
 			return platforms;
 		}
 		
+		/**
+		 * Fills a vector with new Stars with properties loaded from XML.
+		 * @return The vector
+		 */
 		public function getStars():Vector.<Star>
 		{
 			var stars:Vector.<Star> = new Vector.<Star>();

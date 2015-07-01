@@ -1,3 +1,12 @@
+/* *****************************************************************************
+ * Amusing Music 2 is a portfolio piece demonstrating rhythm-based platforming.
+ *   Copyright (C) 2015  James Keats (www.jameskeats.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ ****************************************************************************** */
 package entities 
 {
 	//import com.greensock.TweenLite;
@@ -19,7 +28,7 @@ package entities
 		
 		private var waitTime:Number = 500;
 		private var moveUpTime:Number;
-		private var moveDownTime:Number = 0.3;
+		private var moveDownTime:Number = 0.25;
 		
 		private var topYPos:Number;
 		private var bottomYPos:Number;
@@ -35,6 +44,16 @@ package entities
 		
 		public var myImage:Image;
 		
+		/**
+		 * Create a new platform.
+		 * @param	myID The platform's unique ID
+		 * @param	myScale How many tiles we should take up in the Y direction.
+		 * @param	starID What star we begin to move with.
+		 * @param	soundPiece Which soundpiece of that star we move with.
+		 * @param	x X-coord
+		 * @param	y Y-coord
+		 * @return
+		 */
 		public function MovingPlatform(myID:int, myScale:int, starID:int, soundPiece:int, x:Number=0, y:Number=0)//, graphic:Graphic=null, mask:Mask=null) 
 		{
 			this.myID = myID;
@@ -54,7 +73,7 @@ package entities
 		
 		override public function added():void
 		{
-			moveUpTime = FP.clamp((1 / myScale), 0.05, 0.35);
+			moveUpTime = FP.clamp((1 / myScale), 0.05, 0.3);
 			topYPos = ((myImage.height * myScale) * -1) + C.BASE_TILE_SIZE + this.y;
 			bottomYPos = 0 + this.y;
 			
@@ -100,7 +119,12 @@ package entities
 			goingDown = false;
 		}
 		
-		/* Returns -1 if the item should come before, 0 if the same, 1 if after */
+		/**
+		 * Static sort function used by Vector.sort()
+		 * @param	platformA First platform
+		 * @param	platformB Second platform
+		 * @return -1 if A should come before B, 0 if they're the same, 1 if B should come before A
+		 */
 		static public function sortFunction(platformA:MovingPlatform, platformB:MovingPlatform):Number
 		{
 			if (platformA.myID < platformB.myID)

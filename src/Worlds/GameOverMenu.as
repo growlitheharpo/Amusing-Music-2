@@ -1,3 +1,12 @@
+/* *****************************************************************************
+ * Amusing Music 2 is a portfolio piece demonstrating rhythm-based platforming.
+ *   Copyright (C) 2015  James Keats (www.jameskeats.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ ****************************************************************************** */
 package worlds 
 {
 	import entities.ui.BasicButton;
@@ -23,6 +32,12 @@ package worlds
 		private var returnToGame:BasicButton;
 		private var returnToMainMenu:BasicButton;
 		
+		/**
+		 * One class to handle the "Game Over: You Lose", "Game Over: You Win", and "Level Done" menus.
+		 * @param	destinationLevel The level to load to when the player clicks continue/play again.
+		 * Should probably be 1 if the player has won the game.
+		 * @param	type A static const from this class for which menu type this is.
+		 */
 		public function GameOverMenu(destinationLevel:int, type:String = GAME_LOST) 
 		{
 			super();
@@ -30,7 +45,7 @@ package worlds
 			
 			FP.screen.color = 0xFFFFFF;
 			
-			returnToMainMenu = new BasicButton("Main Menu", 30);
+			returnToMainMenu = new BasicButton("Main Menu", 28);
 			
 			switch (type)
 			{

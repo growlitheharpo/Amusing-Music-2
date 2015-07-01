@@ -1,4 +1,4 @@
-Music by Robert Mitchell.
+Music by Robert Mitchell, Copyright (C) 2015
 
 1.wav
 2.wav
@@ -7,3 +7,5 @@ Music by Robert Mitchell.
 5.wav
 6.wav
 Dubstep.mp3
+
+Note: Except for "dubstep.mp3", these files are not actually used in-game. They've been compiled into an .swf in /lib/

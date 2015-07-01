@@ -1,3 +1,12 @@
+/* *****************************************************************************
+ * Amusing Music 2 is a portfolio piece demonstrating rhythm-based platforming.
+ *   Copyright (C) 2015  James Keats (www.jameskeats.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ ****************************************************************************** */
 package worlds 
 {
 	import entities.MapEntity;
@@ -28,9 +37,11 @@ package worlds
 			super();
 			FP.screen.color = 0xFFFFFF;
 			
-			banner = new LargeBanner("Amusing Music\n2.0");
+			//Draw a lot of stuff.
+			banner = new LargeBanner("Amusing Music\n2");
 			banner.x = FP.halfWidth - banner.halfWidth; banner.y = 10;
 			
+			//Start button is used twice, but we only have one instance of it.
 			startButton = new BasicButton("Start Game", 30);
 			startButton.x = FP.halfWidth - startButton.halfWidth;
 			startButton.y = 220;
@@ -48,6 +59,9 @@ package worlds
 			initMenu();
 		}
 		
+		/**
+		 * Add the banner and "Main" menu buttons
+		 */
 		private function initMenu():void 
 		{
 			removeAll();
@@ -59,6 +73,9 @@ package worlds
 			add(howtoButton);
 		}
 		
+		/**
+		 * Add the "How to Play" menu and buttons.
+		 */
 		private function initHowTo():void
 		{
 			removeAll();
@@ -86,6 +103,11 @@ package worlds
 			}
 		}
 		
+		/**
+		 * Checks if the mouse was over a certain area (but DOESN'T check if it was clicked)
+		 * @param	button The button to check.
+		 * @return True if the mouse was over that button, false otherwise.
+		 */
 		private function checkButtonPressed(button:Entity):Boolean
 		{
 			if (mouseX > button.x && mouseY > button.y && mouseX < button.x + button.width && mouseY < button.y + button.height)
